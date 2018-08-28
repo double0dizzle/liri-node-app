@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-var spotify = require("/keys.js");
+var spotKeys = require("/keys.js");
 
 
 
@@ -15,3 +15,5 @@ fs.readFile("random.txt", "utf8", function(error, data) {
   var dataArr = data.split(",");
   console.log(dataArr);
 });
+
+var spotify = new Spotify(keys.spotify);
