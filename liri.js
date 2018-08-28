@@ -19,7 +19,7 @@ fs.readFile("random.txt", "utf8", function(error, data) {
 });
 
 
-spotify.search({ type: 'track', query: 'I Want It That Way' }, function(err, data) {
+spotify.search({ type: 'track', query: 'I Saw The Sign' }, function(err, data) {
     if (err) {
       return console.log('Error occurred: ' + err);
     }
@@ -40,12 +40,33 @@ spotify.search({ type: 'track', query: 'I Want It That Way' }, function(err, dat
 
 var request = require("request");
 
-request("http://www.omdbapi.com/?t=mr+nobody&y=&plot=short&apikey=trilogy", function(error, response, body) {
+var nodeArgs = process.argv;
+var movieName = "";
+for (var i = 2; i < nodeArgs.length; i++) {
 
-  
-  if (!error && response.statusCode === 200) {
+  if (i > 2 && i < nodeArgs.length) {
+movieName = movieName + "+" + nodeArgs[i];
+}
+else {
+movieName += nodeArgs[i];
+}
+}
+
+var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
+
+// request("http://www.omdbapi.com/?t=mr+nobody&y=&plot=short&apikey=trilogy", function(error, response, body) 
+
+request(queryUrl, function(error, response, body){
+
+      
+    if (!error && response.statusCode === 200) {
       var responseBody = JSON.parse(body);
 
     console.log("The movie's rating is: ", responseBody);
   }
 });
+// if (!error && response.statusCode === 200) {
+    //     console.log("Release Year: " + JSON.parse(body).Year);
+    //   }
+    // });
+
