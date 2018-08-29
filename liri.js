@@ -18,6 +18,9 @@ fs.readFile("random.txt", "utf8", function(error, data) {
   console.log(dataArr);
 });
 
+var Spotify = require('node-spotify-api');
+ 
+
 
 spotify.search({ type: 'track', query: 'I Saw The Sign' }, function(err, data) {
     if (err) {
@@ -27,16 +30,14 @@ spotify.search({ type: 'track', query: 'I Saw The Sign' }, function(err, data) {
   console.log(data[0]); 
   });
 
-
-
-// spotify
-//   .request('https://api.spotify.com/v1/tracks/7yCPwWs66K8Ba5lFuU2bcx')
-//   .then(function(data) {
-//     console.log(data); 
-//   })
-//   .catch(function(err) {
-//     console.error('Error occurred: ' + err); 
-//   });
+spotify
+  .request('https://api.spotify.com/v1/tracks/7yCPwWs66K8Ba5lFuU2bcx')
+  .then(function(data) {
+    console.log(data); 
+  })
+  .catch(function(err) {
+    console.error('Error occurred: ' + err); 
+  });
 
 var request = require("request");
 
@@ -65,8 +66,5 @@ request(queryUrl, function(error, response, body){
     console.log("The movie's rating is: ", responseBody);
   }
 });
-// if (!error && response.statusCode === 200) {
-    //     console.log("Release Year: " + JSON.parse(body).Year);
-    //   }
-    // });
+
 
